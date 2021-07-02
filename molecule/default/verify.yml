@@ -5,6 +5,9 @@
   hosts: all
   gather_facts: false
   tasks:
-  - name: Example assertion
-    assert:
-      that: true
+    - name: "gather list of installed packages"
+      package_facts:
+        manager: "auto"
+    - name: "incron package installed"
+      assert:
+        that: "'stackdriver-agent' in ansible_facts.packages"
