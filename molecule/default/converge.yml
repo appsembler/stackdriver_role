@@ -7,6 +7,12 @@
         update_cache: yes
         cache_valid_time: 3600
 
+    - name: "Install deps"
+      apt:
+        name:
+          - gpg-agent # for some reason we need to add this for 20.04 on github
+      when: ansible_distribution_release != "xenial"
+        
     - name: "Include stackdriver_role"
       include_role:
         name: "stackdriver_role"

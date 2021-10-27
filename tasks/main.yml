@@ -2,12 +2,28 @@
 
 - name: Add Stackdriver public key
   apt_key: url={{ stackdriver_pubkey_url }} state=present
+  when: ansible_distribution_release != "xenial"
   tags: ['stackdriver', 'stackdriver:install']
 
 - name: Add Stackdriver repository
   apt_repository: >
-    repo="deb {{ stackdriver_repo_url }} {{ stackdriver_distro_codename }} main"
+    repo="deb {{ stackdriver_repo_url }} google-cloud-monitoring-{{ ansible_distribution_release }}-all main"
     update_cache=yes
+  when: ansible_distribution_release != "xenial"
+  tags: ['stackdriver', 'stackdriver:install']
+
+# xenial uses a different repo + key
+- name: Add Stackdriver public key
+  apt_key: url={{ stackdriver_xenial_pubkey_url }} state=present
+  when: ansible_distribution_release == "xenial"
+  tags: ['stackdriver', 'stackdriver:install']
+
+# xenial uses a different repo + key
+- name: Add Stackdriver repository
+  apt_repository: >
+    repo="deb {{ stackdriver_xenial_repo_url }} {{ ansible_distribution_release }} main"
+    update_cache=yes
+  when: ansible_distribution_release == "xenial"
   tags: ['stackdriver', 'stackdriver:install']
 
 - name: Install Stackdriver agent

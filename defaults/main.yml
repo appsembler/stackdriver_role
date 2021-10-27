@@ -1,8 +1,9 @@
 ---
 
-stackdriver_distro_codename: "xenial"
-stackdriver_repo_url: "http://repo.stackdriver.com/apt"
-stackdriver_pubkey_url: "https://app.stackdriver.com/RPM-GPG-KEY-stackdriver"
+stackdriver_repo_url: "https://packages.cloud.google.com/apt"
+stackdriver_xenial_repo_url: "http://repo.stackdriver.com/apt"
+stackdriver_pubkey_url: "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
+stackdriver_xenial_pubkey_url: "https://app.stackdriver.com/RPM-GPG-KEY-stackdriver"
 
 # override to furnish custom config template
 stackdriver_agent_config: "stackdriver-agent"
